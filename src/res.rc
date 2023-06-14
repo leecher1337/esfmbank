@@ -1,0 +1,377 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Deutsch (Deutschland) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PROPPAGE_OPERATOR DIALOG DISCARDABLE  0, 0, 196, 204
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Attack:",IDC_STATIC,4,5,30,9
+    EDITTEXT        IDC_ATTACK,35,3,23,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "Spin1",IDC_SPINATTACK,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | 
+                    UDS_NOTHOUSANDS,58,5,6,9
+    LTEXT           "Decay:",IDC_STATIC,72,5,30,9
+    EDITTEXT        IDC_DECAY,103,3,23,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "Spin1",IDC_SPINDECAY,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | 
+                    UDS_NOTHOUSANDS,126,5,11,9
+    LTEXT           "Sustain:",IDC_STATIC,4,19,30,9
+    EDITTEXT        IDC_SUSTAIN,36,17,23,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "Spin1",IDC_SPINSUSTAIN,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS | UDS_NOTHOUSANDS,58,19,11,9
+    LTEXT           "Release:",IDC_STATIC,72,19,30,9
+    EDITTEXT        IDC_RELEASE,104,17,23,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "Spin1",IDC_SPINRELEASE,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS | UDS_NOTHOUSANDS,126,19,11,9
+    LTEXT           "Waveform select:",IDC_STATIC,4,34,61,9
+    COMBOBOX        IDC_WAVEFORM,65,32,128,92,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "Tremolo (AM)",IDC_TREMOLO,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,4,51,57,10
+    CONTROL         "Vibrato (VIB)",IDC_VIBRATO,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,4,64,56,9
+    CONTROL         "Tremolo depth",IDC_TREMOLOD,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,78,51,59,10
+    CONTROL         "Vibrato depth",IDC_VIBRATOD,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,78,64,56,9
+    GROUPBOX        "Spkr chan",IDC_STATIC,144,46,50,27
+    CONTROL         "L",IDC_L,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,150,59,
+                    19,9
+    CONTROL         "R",IDC_R,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,172,59,
+                    17,9
+    CONTROL         "Sustaining voice (EG)",IDC_EG,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,4,76,82,9
+    CONTROL         "Envelope scale (KSR)",IDC_KSR,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,110,76,82,9
+    LTEXT           "Key scale level:",IDC_STATIC,4,92,55,9
+    LTEXT           "Attenuation level:",IDC_STATIC,126,85,36,16
+    EDITTEXT        IDC_ATTENUATION,169,90,23,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "Spin1",IDC_SPINATTENUATION,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,189,92,6,9
+    LTEXT           "Frequency\nmultiplication:",IDC_STATIC,4,115,54,18
+    EDITTEXT        IDC_MUL,65,118,23,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "Spin1",IDC_SPINMUL,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | 
+                    UDS_NOTHOUSANDS,87,120,11,9
+    LTEXT           "Output level:",IDC_STATIC,4,105,55,9
+    COMBOBOX        IDC_OUT,65,104,45,90,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Noise:",IDC_STATIC,4,134,55,9
+    COMBOBOX        IDC_NOISE,65,131,91,61,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Delay:",IDC_STATIC,4,148,55,9
+    COMBOBOX        IDC_DELAY,65,145,119,89,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Frequency number:",IDC_STATIC,4,162,61,9
+    EDITTEXT        IDC_FNUM,65,160,33,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "Spin1",IDC_SPINFNUM,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | 
+                    UDS_NOTHOUSANDS,99,162,11,9
+    LTEXT           "Block:",IDC_STATIC,135,162,24,9
+    EDITTEXT        IDC_BLOCK,161,160,23,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "Spin1",IDC_SPINBLOCK,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | 
+                    UDS_NOTHOUSANDS,183,163,11,9
+    LTEXT           "Freq:",IDC_STATIC,105,120,19,9
+    LTEXT           "0 kHz",IDC_KHZ,125,120,66,10,SS_SUNKEN
+    CONTROL         "Fixed pitch",IDC_FP,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,140,5,48,8
+    LTEXT           "Rel. velocity:",IDC_STATIC,111,106,42,9
+    COMBOBOX        IDC_RELVEL,154,104,40,90,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Modulator input\n(Feedback):",IDC_STATIC,4,170,55,16
+    COMBOBOX        IDC_MOD,65,174,45,97,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "by previous op",IDC_STATIC,114,176,55,9
+    COMBOBOX        IDC_KSL,65,90,58,70,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    PUSHBUTTON      "Apply",IDOK,46,190,44,12
+    PUSHBUTTON      "Reset",IDCANCEL,106,190,44,12
+END
+
+IDD_PROPPAGE_VOICES DIALOG DISCARDABLE  0, 0, 211, 236
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Tab1",IDC_TABCHANNELS,"SysTabControl32",0x0,0,11,210,
+                    225
+    CONTROL         "Use channel 16+17",IDC_PAT16,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,0,1,99,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_PROPPAGE_OPERATOR, DIALOG
+    BEGIN
+        RIGHTMARGIN, 194
+        BOTTOMMARGIN, 202
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // Deutsch (Deutschland) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Deutsch (Österreich) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEA)
+#ifdef _WIN32
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN_AUSTRIAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_MAIN DIALOG DISCARDABLE  0, 0, 466, 298
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "ESFM Bank editor"
+MENU IDR_MAINMENU
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Tab1",IDC_TABVOICE,"SysTabControl32",0x0,114,31,219,258
+    CONTROL         "Second voice",IDC_2NDVOICE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,116,20,57,9
+    CONTROL         "Steal second voice if not found",IDC_STEAL,"Button",
+                    BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,182,20,114,9
+    GROUPBOX        "Instrument",IDC_STATIC,7,7,100,284
+    CONTROL         "Melodic",IDC_MELODIC,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,9,19,40,10
+    CONTROL         "Percussion",IDC_PERCUSSION,"Button",BS_AUTORADIOBUTTON,
+                    53,19,48,9
+    LISTBOX         IDC_INSTRUMENTS,9,33,95,256,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Soundcard connection",IDC_STATIC,346,7,113,63
+    COMBOBOX        IDC_DEVICE,350,18,104,64,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "SB base port:",IDC_STATIC,350,35,49,9
+    EDITTEXT        IDC_SBBASE,405,35,25,12,ES_AUTOHSCROLL
+    CONTROL         "Connect",IDC_CONNECTDEV,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,378,52,53,13
+    GROUPBOX        "MIDI input",IDC_STATIC,346,71,113,50
+    COMBOBOX        IDC_MIDIDEV,350,82,103,96,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Connect",IDC_CONNECTMIDI,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,377,100,53,13
+    GROUPBOX        "Testing",IDC_STATIC,345,123,114,158
+    LTEXT           "Test note #(0...127)",IDC_STATIC,352,134,64,8
+    EDITTEXT        IDC_NOTE,417,132,30,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "Spin1",IDC_SPINNOTE,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,442,135,
+                    11,9
+    PUSHBUTTON      "Play note",IDC_PLAY,353,146,100,13,WS_DISABLED
+    PUSHBUTTON      "Shut up!",IDC_SHUT,353,257,100,13,WS_DISABLED
+    PUSHBUTTON      "Major chord",IDC_PLAYMJCHORD,353,162,100,13,WS_DISABLED
+    PUSHBUTTON      "Minor chord",IDC_PLAYMNCHORD,353,177,100,13,WS_DISABLED
+    PUSHBUTTON      "Augmented chord",IDC_PLAYAUGCHORD,353,193,100,13,
+                    WS_DISABLED
+    PUSHBUTTON      "Dminished chord",IDC_PLAYDIMCHORD,353,209,100,13,
+                    WS_DISABLED
+    PUSHBUTTON      "Major 7-chord",IDC_PLAYMJ7CHORD,353,225,100,13,
+                    WS_DISABLED
+    PUSHBUTTON      "Minor 7-chord",IDC_PLAYMN7CHORD,353,241,100,13,
+                    WS_DISABLED
+END
+
+IDD_SPLASH DIALOG DISCARDABLE  0, 0, 186, 94
+STYLE DS_3DLOOK | DS_CENTER | WS_POPUP | WS_VISIBLE | WS_BORDER
+FONT 8, "MS Sans Serif"
+BEGIN
+    CTEXT           "ESFM Bank Editor",IDC_TITLE,7,13,172,24
+    CTEXT           "(c) leecher@dose.0wnz.at 2023",IDC_STATIC,7,42,172,12
+    CTEXT           "Loading....",IDC_STATIC,7,76,172,11
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_MAIN, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 459
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 291
+    END
+
+    IDD_SPLASH, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 87
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Open...",                    IDM_OPEN
+        MENUITEM "&Save",                       IDM_SAVE, GRAYED
+        MENUITEM "Save &as...",                 IDM_SAVEAS
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       IDM_EXIT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// 24
+//
+
+1                       24      DISCARDABLE     "manifest.xml"
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "0c0704b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "leecher1337\0"
+            VALUE "FileDescription", "esfmbank\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "esfmbank\0"
+            VALUE "LegalCopyright", "Copyright © 2023 leecher@dose.0wnz.at\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "esfmbank.exe\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "ESFM bank editor\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0xc07, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_OPEN                "Open a file with an ESFM bank defintion"
+    IDM_SAVE                "Saves currently opened ESFM bank file"
+    IDM_SAVEAS              "Save currently edited ESFM bank to a new file"
+    IDM_EXIT                "Exits the application"
+END
+
+#endif    // Deutsch (Österreich) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
