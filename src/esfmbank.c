@@ -692,7 +692,9 @@ LRESULT CALLBACK MainDlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			EnumMIDIDevices(hWnd);
 			if (GetFileAttributes("bnk_common.bin") != 0xFFFFFFFF)
 			{
-				LoadPatchSet(hWnd, "bnk_common.bin");
+				lstrcpy(szCurrentFileName, "bnk_common.bin");
+				LoadPatchSet(hWnd, szCurrentFileName);
+				EnableMenuItem(GetMenu(hWnd), IDM_SAVE, MF_ENABLED);
 				PatchSetToMask(hWnd, &m_patches.patches[0]);
 			}
 			return TRUE;
