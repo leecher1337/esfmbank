@@ -852,42 +852,49 @@ LRESULT CALLBACK MainDlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 
 				// Temporarily apply current settings for preview 
 				PatchsetChanged(hWnd, &m_patches.patches[iInstrument], TRUE);
-				MidiMessage(0xc0 | (iInstrument << 8));
-				MidiMessage(0x7f0090 | (n << 8));
-				switch (LOWORD(wParam))
+				if (iInstrument > 127)
 				{
-				case IDC_PLAYMJCHORD:
-					MidiMessage(0x7f0090 | ((n-12) << 8));
-					MidiMessage(0x7f0090 | ((n+4) << 8));
-					MidiMessage(0x7f0090 | ((n-5) << 8));
-					break;
-				case IDC_PLAYMNCHORD:
-					MidiMessage(0x7f0090 | ((n-12) << 8));
-					MidiMessage(0x7f0090 | ((n+3) << 8));
-					MidiMessage(0x7f0090 | ((n-5) << 8));
-					break;
-				case IDC_PLAYAUGCHORD:
-					MidiMessage(0x7f0090 | ((n-12) << 8));
-					MidiMessage(0x7f0090 | ((n+3) << 8));
-					MidiMessage(0x7f0090 | ((n-4) << 8));
-					break;
-				case IDC_PLAYDIMCHORD:
-					MidiMessage(0x7f0090 | ((n-12) << 8));
-					MidiMessage(0x7f0090 | ((n+3) << 8));
-					MidiMessage(0x7f0090 | ((n-6) << 8));
-					break;
-				case IDC_PLAYMJ7CHORD:
-					MidiMessage(0x7f0090 | ((n-12) << 8));
-					MidiMessage(0x7f0090 | ((n-2) << 8));
-					MidiMessage(0x7f0090 | ((n+4) << 8));
-					MidiMessage(0x7f0090 | ((n-5) << 8));
-					break;
-				case IDC_PLAYMN7CHORD:
-					MidiMessage(0x7f0090 | ((n-12) << 8));
-					MidiMessage(0x7f0090 | ((n-2) << 8));
-					MidiMessage(0x7f0090 | ((n+3) << 8));
-					MidiMessage(0x7f0090 | ((n-5) << 8));
-					break;
+					MidiMessage(0x7f0099 | ((iInstrument - 128) << 8));
+				} 
+				else 
+				{
+					MidiMessage(0xc0 | (iInstrument << 8));
+					MidiMessage(0x7f0090 | (n << 8));
+					switch (LOWORD(wParam))
+					{
+					case IDC_PLAYMJCHORD:
+						MidiMessage(0x7f0090 | ((n-12) << 8));
+						MidiMessage(0x7f0090 | ((n+4) << 8));
+						MidiMessage(0x7f0090 | ((n-5) << 8));
+						break;
+					case IDC_PLAYMNCHORD:
+						MidiMessage(0x7f0090 | ((n-12) << 8));
+						MidiMessage(0x7f0090 | ((n+3) << 8));
+						MidiMessage(0x7f0090 | ((n-5) << 8));
+						break;
+					case IDC_PLAYAUGCHORD:
+						MidiMessage(0x7f0090 | ((n-12) << 8));
+						MidiMessage(0x7f0090 | ((n+3) << 8));
+						MidiMessage(0x7f0090 | ((n-4) << 8));
+						break;
+					case IDC_PLAYDIMCHORD:
+						MidiMessage(0x7f0090 | ((n-12) << 8));
+						MidiMessage(0x7f0090 | ((n+3) << 8));
+						MidiMessage(0x7f0090 | ((n-6) << 8));
+						break;
+					case IDC_PLAYMJ7CHORD:
+						MidiMessage(0x7f0090 | ((n-12) << 8));
+						MidiMessage(0x7f0090 | ((n-2) << 8));
+						MidiMessage(0x7f0090 | ((n+4) << 8));
+						MidiMessage(0x7f0090 | ((n-5) << 8));
+						break;
+					case IDC_PLAYMN7CHORD:
+						MidiMessage(0x7f0090 | ((n-12) << 8));
+						MidiMessage(0x7f0090 | ((n-2) << 8));
+						MidiMessage(0x7f0090 | ((n+3) << 8));
+						MidiMessage(0x7f0090 | ((n-5) << 8));
+						break;
+					}
 				}
 				m_patches.patches[iInstrument] = psBak;
 				break;
