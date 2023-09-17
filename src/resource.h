@@ -59,7 +59,9 @@
 #define IDC_NOTE                        1059
 #define IDC_SPINNOTE                    1060
 #define IDC_SHUT                        1061
+#define IDC_FNUMTXT                     1061
 #define IDC_PLAYMJCHORD                 1062
+#define IDC_BLOCKTXT                    1062
 #define IDC_PLAYMNCHORD                 1063
 #define IDC_PLAYAUGCHORD                1064
 #define IDC_PLAYDIMCHORD                1065
@@ -76,7 +78,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        107
 #define _APS_NEXT_COMMAND_VALUE         40005
-#define _APS_NEXT_CONTROL_VALUE         1061
+#define _APS_NEXT_CONTROL_VALUE         1066
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

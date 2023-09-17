@@ -26,8 +26,9 @@ LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
 // Dialog
 //
 
-IDD_PROPPAGE_OPERATOR DIALOG DISCARDABLE  0, 0, 196, 204
+IDD_PROPPAGE_OPERATOR DIALOGEX 0, 0, 196, 204
 STYLE WS_CHILD
+EXSTYLE WS_EX_CONTROLPARENT
 FONT 8, "MS Sans Serif"
 BEGIN
     LTEXT           "Attack:",IDC_STATIC,4,5,30,9
@@ -40,6 +41,8 @@ BEGIN
     CONTROL         "Spin1",IDC_SPINDECAY,"msctls_updown32",UDS_SETBUDDYINT | 
                     UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | 
                     UDS_NOTHOUSANDS,126,5,11,9
+    CONTROL         "Fixed pitch",IDC_FP,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,140,5,48,8
     LTEXT           "Sustain:",IDC_STATIC,4,19,30,9
     EDITTEXT        IDC_SUSTAIN,36,17,23,12,ES_AUTOHSCROLL | ES_NUMBER
     CONTROL         "Spin1",IDC_SPINSUSTAIN,"msctls_updown32",
@@ -55,10 +58,10 @@ BEGIN
                     WS_TABSTOP
     CONTROL         "Tremolo (AM)",IDC_TREMOLO,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,4,51,57,10
-    CONTROL         "Vibrato (VIB)",IDC_VIBRATO,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,4,64,56,9
     CONTROL         "Tremolo depth",IDC_TREMOLOD,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,78,51,59,10
+    CONTROL         "Vibrato (VIB)",IDC_VIBRATO,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,4,64,56,9
     CONTROL         "Vibrato depth",IDC_VIBRATOD,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,78,64,56,9
     GROUPBOX        "Spkr chan",IDC_STATIC,144,46,50,27
@@ -71,60 +74,59 @@ BEGIN
     CONTROL         "Envelope scale (KSR)",IDC_KSR,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,110,76,82,9
     LTEXT           "Key scale level:",IDC_STATIC,4,92,55,9
+    COMBOBOX        IDC_KSL,65,90,58,70,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
     LTEXT           "Attenuation level:",IDC_STATIC,126,85,36,16
     EDITTEXT        IDC_ATTENUATION,169,90,23,12,ES_AUTOHSCROLL | ES_NUMBER
     CONTROL         "Spin1",IDC_SPINATTENUATION,"msctls_updown32",
                     UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
                     UDS_ARROWKEYS,189,92,6,9
+    LTEXT           "Output level:",IDC_STATIC,4,105,55,9
+    COMBOBOX        IDC_OUT,65,104,45,90,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Rel. velocity:",IDC_STATIC,111,106,42,9
+    COMBOBOX        IDC_RELVEL,154,104,40,90,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
     LTEXT           "Frequency\nmultiplication:",IDC_STATIC,4,115,54,18
     EDITTEXT        IDC_MUL,65,118,23,12,ES_AUTOHSCROLL | ES_NUMBER
     CONTROL         "Spin1",IDC_SPINMUL,"msctls_updown32",UDS_SETBUDDYINT | 
                     UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | 
                     UDS_NOTHOUSANDS,87,120,11,9
-    LTEXT           "Output level:",IDC_STATIC,4,105,55,9
-    COMBOBOX        IDC_OUT,65,104,45,90,CBS_DROPDOWNLIST | WS_VSCROLL | 
-                    WS_TABSTOP
+    LTEXT           "Freq:",IDC_STATIC,105,120,19,9
+    LTEXT           "0 kHz",IDC_KHZ,125,120,66,10,SS_SUNKEN
     LTEXT           "Noise:",IDC_STATIC,4,134,55,9
     COMBOBOX        IDC_NOISE,65,131,91,61,CBS_DROPDOWNLIST | WS_VSCROLL | 
                     WS_TABSTOP
     LTEXT           "Delay:",IDC_STATIC,4,148,55,9
     COMBOBOX        IDC_DELAY,65,145,119,89,CBS_DROPDOWNLIST | WS_VSCROLL | 
                     WS_TABSTOP
-    LTEXT           "Frequency number:",IDC_STATIC,4,162,61,9
+    LTEXT           "Frequency number:",IDC_FNUMTXT,4,162,61,9
     EDITTEXT        IDC_FNUM,65,160,33,12,ES_AUTOHSCROLL | ES_NUMBER
     CONTROL         "Spin1",IDC_SPINFNUM,"msctls_updown32",UDS_SETBUDDYINT | 
                     UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | 
                     UDS_NOTHOUSANDS,99,162,11,9
-    LTEXT           "Block:",IDC_STATIC,135,162,24,9
+    RTEXT           "Block:",IDC_BLOCKTXT,114,162,45,9
     EDITTEXT        IDC_BLOCK,161,160,23,12,ES_AUTOHSCROLL | ES_NUMBER
     CONTROL         "Spin1",IDC_SPINBLOCK,"msctls_updown32",UDS_SETBUDDYINT | 
                     UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | 
                     UDS_NOTHOUSANDS,183,163,11,9
-    LTEXT           "Freq:",IDC_STATIC,105,120,19,9
-    LTEXT           "0 kHz",IDC_KHZ,125,120,66,10,SS_SUNKEN
-    CONTROL         "Fixed pitch",IDC_FP,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,140,5,48,8
-    LTEXT           "Rel. velocity:",IDC_STATIC,111,106,42,9
-    COMBOBOX        IDC_RELVEL,154,104,40,90,CBS_DROPDOWNLIST | WS_VSCROLL | 
-                    WS_TABSTOP
     LTEXT           "Modulator input\n(Feedback):",IDC_STATIC,4,170,55,16
     COMBOBOX        IDC_MOD,65,174,45,97,CBS_DROPDOWNLIST | WS_VSCROLL | 
                     WS_TABSTOP
     LTEXT           "by previous op",IDC_STATIC,114,176,55,9
-    COMBOBOX        IDC_KSL,65,90,58,70,CBS_DROPDOWNLIST | WS_VSCROLL | 
-                    WS_TABSTOP
-    PUSHBUTTON      "Apply",IDOK,46,190,44,12
+    DEFPUSHBUTTON   "Apply",IDOK,46,190,44,12
     PUSHBUTTON      "Reset",IDCANCEL,106,190,44,12
 END
 
-IDD_PROPPAGE_VOICES DIALOG DISCARDABLE  0, 0, 211, 236
+IDD_PROPPAGE_VOICES DIALOGEX 0, 0, 211, 236
 STYLE WS_CHILD
+EXSTYLE WS_EX_CONTROLPARENT
 FONT 8, "MS Sans Serif"
 BEGIN
-    CONTROL         "Tab1",IDC_TABCHANNELS,"SysTabControl32",0x0,0,11,210,
-                    225
     CONTROL         "Use channel 16+17",IDC_PAT16,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,0,1,99,10
+    CONTROL         "Tab1",IDC_TABCHANNELS,"SysTabControl32",WS_TABSTOP,0,11,
+                    210,225
 END
 
 
@@ -162,18 +164,14 @@ LANGUAGE LANG_GERMAN, SUBLANG_GERMAN_AUSTRIAN
 // Dialog
 //
 
-IDD_MAIN DIALOG DISCARDABLE  0, 0, 466, 298
+IDD_MAIN DIALOGEX 0, 0, 466, 298
 STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
     WS_SYSMENU
+EXSTYLE WS_EX_CONTROLPARENT
 CAPTION "ESFM Bank editor"
 MENU IDR_MAINMENU
 FONT 8, "MS Sans Serif"
 BEGIN
-    CONTROL         "Tab1",IDC_TABVOICE,"SysTabControl32",0x0,114,31,219,258
-    CONTROL         "Second voice",IDC_2NDVOICE,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,116,20,57,9
-    CONTROL         "Steal second voice if not found",IDC_STEAL,"Button",
-                    BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,182,20,114,9
     GROUPBOX        "Instrument",IDC_STATIC,7,7,100,284
     CONTROL         "Melodic",IDC_MELODIC,"Button",BS_AUTORADIOBUTTON | 
                     WS_GROUP,9,19,40,10
@@ -181,6 +179,12 @@ BEGIN
                     53,19,48,9
     LISTBOX         IDC_INSTRUMENTS,9,33,95,256,LBS_NOINTEGRALHEIGHT | 
                     WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Second voice",IDC_2NDVOICE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,116,20,57,9
+    CONTROL         "Steal second voice if not found",IDC_STEAL,"Button",
+                    BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,182,20,114,9
+    CONTROL         "Tab1",IDC_TABVOICE,"SysTabControl32",WS_TABSTOP,114,31,
+                    219,258
     GROUPBOX        "Soundcard connection",IDC_STATIC,346,7,113,63
     COMBOBOX        IDC_DEVICE,350,18,104,64,CBS_DROPDOWNLIST | CBS_SORT | 
                     WS_VSCROLL | WS_TABSTOP

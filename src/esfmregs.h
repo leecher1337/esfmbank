@@ -36,16 +36,40 @@ typedef struct
 	unsigned char SUSTAIN:4;
 } OPREG3;
 
-typedef struct
+typedef struct	/* Fixed pitch */
 {
 	unsigned char FNUMlo;
+} OPREG4_FP;
+
+typedef struct	/* No fixed pitch */
+{
+	unsigned char CTlo:2; /* Coarse tune */
+	unsigned char FINETUNE:6;
+} OPREG4_NFP;
+
+typedef union
+{
+	OPREG4_FP FP;
+	OPREG4_NFP NFP;
 } OPREG4;
 
-typedef struct
+typedef struct	/* Fixed pitch */
 {
 	unsigned char FNUMhi:2;
 	unsigned char BLOCK:3;
 	unsigned char DELAY:3;
+} OPREG5_FP;
+
+typedef struct	/* Fixed pitch */
+{
+	unsigned char CThi:5;	/* Coarse tune */
+	unsigned char DELAY:3;
+} OPREG5_NFP;
+
+typedef union
+{
+	OPREG5_FP FP;
+	OPREG5_NFP NFP;
 } OPREG5;
 
 typedef struct

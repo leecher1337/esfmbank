@@ -21,9 +21,6 @@
 #include "essplaymid/natv.h"
 #include "esdev.h"
 
-// Load from ntdll if you want to avoid the bloated CRT
-#define RtlCompareMemory memcmp
-
 #pragma comment (lib, "comctl32.lib")  // Common controls
 #pragma comment (lib, "winmm.lib")
 #pragma comment (lib, "shlwapi.lib")
@@ -85,17 +82,47 @@ static char * _float_to_char(double x, char *p)
 
 void CalcFreq(HWND hWnd)
 {
+	BOOL fFP = IsDlgButtonChecked(hWnd, IDC_FP);
 	int MULT = GetDlgItemInt(hWnd, IDC_MUL, NULL, FALSE);
 	int FNUM = GetDlgItemInt(hWnd, IDC_FNUM, NULL, FALSE);
 	int BLOCK = GetDlgItemInt(hWnd, IDC_BLOCK, NULL, FALSE);
-	double FREQ = MULT * FNUM * ((double)1.00 / ((int)1<<(20 - BLOCK))) * 49716;
 	char szFreq[16];
 
-	// BLOAT BLOAT BLOAT:
-	//sprintf (szFreq, "%d kHz", FREQ);
-	_float_to_char(FREQ, szFreq);
-	lstrcat(szFreq, " kHz");
+	if (fFP)
+	{
+		double FREQ = MULT * FNUM * ((double)1.00 / ((int)1<<(20 - BLOCK))) * 49716;
+
+		// BLOAT BLOAT BLOAT:
+		//sprintf (szFreq, "%d kHz", FREQ);
+		_float_to_char(FREQ, szFreq);
+		lstrcat(szFreq, " kHz");
+	} else {
+		// FIXME: Not supported yet
+		*szFreq = 0; 
+	}
 	SetDlgItemText(hWnd, IDC_KHZ, szFreq);
+}
+
+static void ChangeFixedPitch(HWND hWnd, HWND hWndFP)
+{
+	if (SendMessage(hWndFP, BM_GETCHECK, 0, 0) == BST_CHECKED)
+	{
+		SetDlgItemText(hWnd, IDC_FNUMTXT, "Frequency number:");
+		SetDlgItemText(hWnd, IDC_BLOCKTXT, "Block:");
+		SendDlgItemMessage (hWnd, IDC_FNUM, EM_LIMITTEXT, 4, 0);
+		SendDlgItemMessage (hWnd, IDC_BLOCK, EM_LIMITTEXT, 1, 0);
+		SendDlgItemMessage (hWnd, IDC_SPINFNUM, UDM_SETRANGE, 0, MAKELONG(1023,0));
+		SendDlgItemMessage (hWnd, IDC_SPINBLOCK, UDM_SETRANGE, 0, MAKELONG(7,0));
+	}
+	else
+	{
+		SetDlgItemText(hWnd, IDC_FNUMTXT, "Coarse tune:");
+		SetDlgItemText(hWnd, IDC_BLOCKTXT, "Fine tune:");
+		SendDlgItemMessage (hWnd, IDC_FNUM, EM_LIMITTEXT, 3, 0);
+		SendDlgItemMessage (hWnd, IDC_BLOCK, EM_LIMITTEXT, 2, 0);
+		SendDlgItemMessage (hWnd, IDC_SPINFNUM, UDM_SETRANGE, 0, MAKELONG(127,0));
+		SendDlgItemMessage (hWnd, IDC_SPINBLOCK, UDM_SETRANGE, 0, MAKELONG(63,0));
+	}
 }
 
 void OpDlgToReg(HWND hWnd, PATCH *pat, DWORD opno)
@@ -103,6 +130,7 @@ void OpDlgToReg(HWND hWnd, PATCH *pat, DWORD opno)
 	USHORT FNUM;
 	OPREG *op = &pat->o[opno];
 	BYTE mask;
+	BOOL fFP = IsDlgButtonChecked(hWnd, IDC_FP);
 
 	op->r2.ATTACK = GetDlgItemInt(hWnd, IDC_ATTACK, NULL, FALSE);
 	op->r2.DECAY = GetDlgItemInt(hWnd, IDC_DECAY, NULL, FALSE);
@@ -110,22 +138,31 @@ void OpDlgToReg(HWND hWnd, PATCH *pat, DWORD opno)
 	op->r3.RELEASE = GetDlgItemInt(hWnd, IDC_RELEASE, NULL, FALSE);
 	op->r1.ATTENUATION = GetDlgItemInt(hWnd, IDC_ATTENUATION, NULL, FALSE);
 	op->r0.MULT = GetDlgItemInt(hWnd, IDC_MUL, NULL, FALSE);
-	op->r5.BLOCK = GetDlgItemInt(hWnd, IDC_BLOCK, NULL, FALSE);
-	
+
 	FNUM = GetDlgItemInt(hWnd, IDC_FNUM, NULL, FALSE);
-	op->r4.FNUMlo = FNUM&0xFF;
-	op->r5.FNUMhi = FNUM>>8;
+	if (fFP)
+	{
+		op->r5.FP.BLOCK = GetDlgItemInt(hWnd, IDC_BLOCK, NULL, FALSE);
+		op->r4.FP.FNUMlo = FNUM&0xFF;
+		op->r5.FP.FNUMhi = FNUM>>8;
+	}
+	else
+	{
+		op->r4.NFP.FINETUNE = GetDlgItemInt(hWnd, IDC_BLOCK, NULL, FALSE);
+		op->r4.NFP.CTlo = FNUM&3;
+		op->r5.NFP.CThi = FNUM>>2;
+	}
 
 	op->r7.WAVE = (UCHAR)SendDlgItemMessage(hWnd, IDC_WAVEFORM, CB_GETCURSEL, 0, 0);
 	op->r1.KSL = (UCHAR)SendDlgItemMessage(hWnd, IDC_KSL, CB_GETCURSEL, 0, 0);
 	op->r7.OU = (UCHAR)SendDlgItemMessage(hWnd, IDC_OUT, CB_GETCURSEL, 0, 0);
 	op->r7.NOISE = (UCHAR)SendDlgItemMessage(hWnd, IDC_NOISE, CB_GETCURSEL, 0, 0);
-	op->r5.DELAY = (UCHAR)SendDlgItemMessage(hWnd, IDC_DELAY, CB_GETCURSEL, 0, 0);
+	op->r5.FP.DELAY = (UCHAR)SendDlgItemMessage(hWnd, IDC_DELAY, CB_GETCURSEL, 0, 0);
 	op->r6.MOD = (UCHAR)SendDlgItemMessage(hWnd, IDC_MOD, CB_GETCURSEL, 0, 0);
 	pat->h3 &= ~(3 << (opno<<1));
 	pat->h3 |= SendDlgItemMessage(hWnd, IDC_RELVEL, CB_GETCURSEL, 0, 0) << (opno<<1);
 
-	mask = IsDlgButtonChecked(hWnd, IDC_FP) << (4+opno);
+	mask = fFP << (4+opno);
 	pat->h0 &= ~mask;
 	pat->h0 |= mask;
 	op->r0.TRM = IsDlgButtonChecked(hWnd, IDC_TREMOLO);
@@ -138,10 +175,28 @@ void OpDlgToReg(HWND hWnd, PATCH *pat, DWORD opno)
 	op->r6.R = IsDlgButtonChecked(hWnd, IDC_R);
 }
 
+void RegToFNUM(HWND hWnd, PATCH *pat, DWORD opno, BOOL fFP)
+{
+	OPREG *op = &pat->o[opno];
+	USHORT FNUM;
+
+	if (fFP)
+	{
+		SetDlgItemInt(hWnd, IDC_BLOCK, op->r5.FP.BLOCK, FALSE);
+		FNUM = op->r4.FP.FNUMlo | op->r5.FP.FNUMhi<<8;
+	}
+	else
+	{
+		SetDlgItemInt(hWnd, IDC_BLOCK, op->r4.NFP.FINETUNE, FALSE);
+		FNUM = op->r5.NFP.CThi<<2 | op->r4.NFP.CTlo;
+	}
+	SetDlgItemInt(hWnd, IDC_FNUM, FNUM, FALSE);
+}
+
 void RegToOpDlg(HWND hWnd, PATCH *pat, DWORD opno)
 {
-	USHORT FNUM;
 	OPREG *op = &pat->o[opno];
+	BOOL fFP = (pat->h0 >> (4+opno))&1;
 
 	SetDlgItemInt(hWnd, IDC_ATTACK, op->r2.ATTACK, FALSE);
 	SetDlgItemInt(hWnd, IDC_DECAY, op->r2.DECAY, FALSE);
@@ -149,20 +204,18 @@ void RegToOpDlg(HWND hWnd, PATCH *pat, DWORD opno)
 	SetDlgItemInt(hWnd, IDC_RELEASE, op->r3.RELEASE, FALSE);
 	SetDlgItemInt(hWnd, IDC_ATTENUATION, op->r1.ATTENUATION, FALSE);
 	SetDlgItemInt(hWnd, IDC_MUL, op->r0.MULT, FALSE);
-	SetDlgItemInt(hWnd, IDC_BLOCK, op->r5.BLOCK, FALSE);
-
-	FNUM = op->r4.FNUMlo | op->r5.FNUMhi<<8;
-	SetDlgItemInt(hWnd, IDC_FNUM, FNUM, FALSE);
 
 	SendDlgItemMessage(hWnd, IDC_WAVEFORM, CB_SETCURSEL, op->r7.WAVE, 0);
 	SendDlgItemMessage(hWnd, IDC_KSL, CB_SETCURSEL, op->r1.KSL, 0);
 	SendDlgItemMessage(hWnd, IDC_OUT, CB_SETCURSEL, op->r7.OU, 0);
 	SendDlgItemMessage(hWnd, IDC_NOISE, CB_SETCURSEL, op->r7.NOISE, 0);
-	SendDlgItemMessage(hWnd, IDC_DELAY, CB_SETCURSEL, op->r5.DELAY, 0);
+	SendDlgItemMessage(hWnd, IDC_DELAY, CB_SETCURSEL, op->r5.FP.DELAY, 0);
 	SendDlgItemMessage(hWnd, IDC_MOD, CB_SETCURSEL, op->r6.MOD, 0);
 	SendDlgItemMessage(hWnd, IDC_RELVEL, CB_SETCURSEL, pat->h3>>(opno<<1) & 3 , 0);
+	RegToFNUM(hWnd, pat, opno, fFP);
 
-	CheckDlgButton(hWnd, IDC_FP, (pat->h0 >> (4+opno))&1);
+	CheckDlgButton(hWnd, IDC_FP, fFP);
+	ChangeFixedPitch(hWnd, GetDlgItem(hWnd, IDC_FP));
 	CheckDlgButton(hWnd, IDC_TREMOLO, op->r0.TRM);
 	CheckDlgButton(hWnd, IDC_VIBRATO, op->r0.VIB);
 	CheckDlgButton(hWnd, IDC_TREMOLOD, op->r6.TRMD);
@@ -384,6 +437,24 @@ void ResetOp(HWND hWndOp, PATCHSET *ps)
 	Change2ndVoice(hWndOp, ((HDR0*)&ps->p[0].h0)->OP, TRUE);
 }
 
+void ResetFNUM(HWND hWndOp, PATCHSET *ps)
+{
+	DWORD dwOp, dwVoice;
+	HWND hWndVoice = GetParent(GetParent(hWndOp));
+	HWND hWndTab = GetDlgItem(hWndVoice, IDC_TABCHANNELS), hWndMain;
+
+	dwOp = TabCtrl_GetCurSel(hWndTab);
+
+	hWndMain = GetParent(GetParent(hWndVoice));
+	hWndTab = GetDlgItem(hWndMain, IDC_TABVOICE);
+	dwVoice = TabCtrl_GetCurSel(hWndTab);
+	RegToFNUM(hWndOp, &ps->p[dwVoice], dwOp, IsDlgButtonChecked(hWndOp, IDC_FP));
+}
+
+
+// Load from ntdll if you want to avoid the bloated CRT
+#define RtlCompareMemory memcmp
+
 BOOL VoiceChanged(HWND hWndMain, HWND hWndVoice, DWORD dwVoice, PATCHSET *ps, BOOL fApply)
 {
 	TCITEM tci={0};
@@ -554,6 +625,15 @@ LRESULT CALLBACK OperatorDlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
 					}
 				}
 				break;
+			case IDC_FP:
+				if (HIWORD(wParam) == BN_CLICKED)
+				{
+						HWND hWndRoot = GetAncestor(hWnd, GA_ROOT);
+						ChangeFixedPitch(hWnd, (HWND) lParam);
+						iCurSel = GetCurrentInstrument(hWndRoot);
+						ResetFNUM(hWnd, &m_patches.patches[iCurSel]);
+				}
+				break;
 			case IDC_MUL:
 			case IDC_FNUM:
 			case IDC_BLOCK:
@@ -576,6 +656,8 @@ void CreateTabs(HWND hWnd, UINT uDlgItemTabs, UINT uDlgItemPage, DLGPROC lpDialo
 	RECT rc;
 	UINT i;
 
+	// https://web.archive.org/web/20140325152119/http://support.microsoft.com/kb/149501
+	SetWindowLong(hWndTabs, GWL_EXSTYLE, GetWindowLong(hWndTabs, GWL_EXSTYLE) | WS_EX_CONTROLPARENT);
 	GetClientRect (hWndTabs, &rc);
 	tci.mask=TCIF_TEXT | TCIF_PARAM;
 	for (i=0; i<nTexts; i++)
