@@ -312,8 +312,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,0,1
- PRODUCTVERSION 1,0,0,1
+ FILEVERSION 1,0,0,3
+ PRODUCTVERSION 1,0,0,3
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -331,14 +331,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "leecher1337\0"
             VALUE "FileDescription", "esfmbank\0"
-            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "FileVersion", "1, 0, 0, 3\0"
             VALUE "InternalName", "esfmbank\0"
             VALUE "LegalCopyright", "Copyright © 2023 leecher@dose.0wnz.at\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "esfmbank.exe\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "ESFM bank editor\0"
-            VALUE "ProductVersion", "1, 0, 0, 1\0"
+            VALUE "ProductVersion", "1, 0, 0, 3\0"
             VALUE "SpecialBuild", "\0"
         END
     END
