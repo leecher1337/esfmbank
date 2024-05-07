@@ -1,0 +1,4 @@
+*.c text eol=crlf
+*.h text eol=crlf
+*.dsp text eol=crlf
+*.rc text eol=crlf
