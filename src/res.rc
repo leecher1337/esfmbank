@@ -13,7 +13,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// Deutsch (Deutschland) resources
+// German (Germany) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
 #ifdef _WIN32
@@ -29,7 +29,7 @@ LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
 IDD_PROPPAGE_OPERATOR DIALOGEX 0, 0, 196, 204
 STYLE WS_CHILD
 EXSTYLE WS_EX_CONTROLPARENT
-FONT 8, "MS Sans Serif"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
     LTEXT           "Attack:",IDC_STATIC,4,5,30,9
     EDITTEXT        IDC_ATTACK,35,3,23,12,ES_AUTOHSCROLL | ES_NUMBER
@@ -121,7 +121,7 @@ END
 IDD_PROPPAGE_VOICES DIALOGEX 0, 0, 211, 236
 STYLE WS_CHILD
 EXSTYLE WS_EX_CONTROLPARENT
-FONT 8, "MS Sans Serif"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
     CONTROL         "Use channel 16+17",IDC_PAT16,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,0,1,99,10
@@ -146,12 +146,12 @@ BEGIN
 END
 #endif    // APSTUDIO_INVOKED
 
-#endif    // Deutsch (Deutschland) resources
+#endif    // German (Germany) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
 /////////////////////////////////////////////////////////////////////////////
-// Deutsch (Österreich) resources
+// German (Austria) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEA)
 #ifdef _WIN32
@@ -364,7 +364,7 @@ BEGIN
     IDM_EXIT                "Exits the application"
 END
 
-#endif    // Deutsch (Österreich) resources
+#endif    // German (Austria) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
