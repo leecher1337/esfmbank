@@ -723,7 +723,7 @@ void EnablePlayButtons(HWND hWnd, BOOL fEnable)
 		EnableWindow(GetDlgItem(hWnd, auMidiButt[i]), fEnable);
 }
 
-void EnumMIDIDevices(HWND hWnd)
+UINT EnumMIDIDevices(HWND hWnd)
 {
 	HWND hWndCB = GetDlgItem(hWnd, IDC_MIDIDEV);
     UINT i, numMidiInDevs = midiInGetNumDevs();
@@ -735,6 +735,7 @@ void EnumMIDIDevices(HWND hWnd)
         if (midiInGetDevCapsA(i, &midiCaps, sizeof(MIDIINCAPSA)) == MMSYSERR_NOERROR) 
 			SendMessage(hWndCB, CB_SETITEMDATA, SendMessage(hWndCB, CB_ADDSTRING, 0, (LPARAM)midiCaps.szPname), i);
     }
+	return numMidiInDevs;
 }
 
 void EnumDevCB(ESS_DEVCFG *pCfg, void *pUser)
@@ -771,7 +772,12 @@ LRESULT CALLBACK MainDlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 				SendMessage(hWndCB, CB_SETCURSEL, 0, 0);
 				SendMessage(hWnd, WM_COMMAND, MAKEWPARAM(IDC_DEVICE, CBN_SELCHANGE), (LPARAM)hWndCB);
 			}
-			EnumMIDIDevices(hWnd);
+			if (EnumMIDIDevices(hWnd))
+			{
+				HWND hWndCB = GetDlgItem(hWnd, IDC_MIDIDEV);
+				SendMessage(hWndCB, CB_SETCURSEL, 0, 0);
+				SendMessage(hWnd, WM_COMMAND, MAKEWPARAM(IDC_MIDIDEV, CBN_SELCHANGE), (LPARAM)hWndCB);
+			}
 			if (GetFileAttributes("bnk_common.bin") != 0xFFFFFFFF)
 			{
 				lstrcpy(szCurrentFileName, "bnk_common.bin");
