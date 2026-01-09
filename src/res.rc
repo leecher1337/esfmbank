@@ -178,7 +178,7 @@ BEGIN
     CONTROL         "Percussion",IDC_PERCUSSION,"Button",BS_AUTORADIOBUTTON,
                     53,19,48,9
     LISTBOX         IDC_INSTRUMENTS,9,33,95,256,LBS_NOINTEGRALHEIGHT | 
-                    WS_VSCROLL | WS_TABSTOP
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
     CONTROL         "Second voice",IDC_2NDVOICE,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,116,20,57,9
     CONTROL         "Steal second voice if not found",IDC_STEAL,"Button",
@@ -312,8 +312,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,0,3
- PRODUCTVERSION 1,0,0,3
+ FILEVERSION 1,0,0,4
+ PRODUCTVERSION 1,0,0,4
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -331,14 +331,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "leecher1337\0"
             VALUE "FileDescription", "esfmbank\0"
-            VALUE "FileVersion", "1, 0, 0, 3\0"
+            VALUE "FileVersion", "1, 0, 0, 4\0"
             VALUE "InternalName", "esfmbank\0"
             VALUE "LegalCopyright", "Copyright © 2023 leecher@dose.0wnz.at\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "esfmbank.exe\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "ESFM bank editor\0"
-            VALUE "ProductVersion", "1, 0, 0, 3\0"
+            VALUE "ProductVersion", "1, 0, 0, 4\0"
             VALUE "SpecialBuild", "\0"
         END
     END
