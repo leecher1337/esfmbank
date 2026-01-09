@@ -815,6 +815,7 @@ LRESULT CALLBACK MainDlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 					UpdateWindow (hWndInstr);
 
 				}
+				break;
 			case IDC_INSTRUMENTS:
 				if (HIWORD(wParam) == LBN_SELCHANGE)
 				{
