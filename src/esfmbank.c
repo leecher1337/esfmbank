@@ -25,6 +25,21 @@
 #pragma comment (lib, "winmm.lib")
 #pragma comment (lib, "shlwapi.lib")
 
+#ifndef DWORD_PTR
+typedef unsigned long DWORD_PTR;
+#endif
+
+// VC6 workaround
+static HWND GetRoot(HWND hwnd) {
+	HWND root = NULL;
+	HWND parent = hwnd;
+
+	while((parent = GetParent(parent)) != NULL) {
+		root = parent;
+	}
+
+	return root;
+}
 
 #pragma pack(1)
 typedef struct
@@ -614,7 +629,7 @@ LRESULT CALLBACK OperatorDlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
 			case IDCANCEL:
 				if (HIWORD(wParam) == BN_CLICKED)
 				{
-					HWND hWndRoot = GetAncestor(hWnd, GA_ROOT);
+					HWND hWndRoot = GetRoot(hWnd);
 					iCurSel = GetCurrentInstrument(hWndRoot);
 					if (iCurSel != LB_ERR)
 					{
@@ -628,7 +643,7 @@ LRESULT CALLBACK OperatorDlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
 			case IDC_FP:
 				if (HIWORD(wParam) == BN_CLICKED)
 				{
-						HWND hWndRoot = GetAncestor(hWnd, GA_ROOT);
+						HWND hWndRoot = GetRoot(hWnd);
 						ChangeFixedPitch(hWnd, (HWND) lParam);
 						iCurSel = GetCurrentInstrument(hWndRoot);
 						ResetFNUM(hWnd, &m_patches.patches[iCurSel]);

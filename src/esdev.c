@@ -23,6 +23,7 @@
 
 DWORD EnumESSDevices(HWND hWnd, void (*EnumCB)(ESS_DEVCFG *pCfg, void *pUser), void *pUser)
 {
+#ifdef CM_Free_Log_Conf_Handle 
 	GUID render = KSCATEGORY_RENDER;
 	HDEVINFO hDevInfo;
 	SP_DEVINFO_DATA infoData={0};
@@ -92,5 +93,8 @@ DWORD EnumESSDevices(HWND hWnd, void (*EnumCB)(ESS_DEVCFG *pCfg, void *pUser), v
 		}
 	}
 	return ret;
+#else
+	return 0;
+#endif
 }
 
